@@ -13,13 +13,9 @@ import requests,sys,io
 from lxml import etree
 # import pandas as pd
 from openpyxl import Workbook
-
-
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 """定义获取大乐透/双色球历史数据的函数（正常情况）"""
-
-
 def get_history_data_D_S15(url):
     # 获取网页
     rs_1 = requests.get(url)  # 这一行使用了requests库中的get方法来向指定的url发送一个HTTP GET请求，然后将响应保存在rs_1变量中。这个响应对象包含了从指定网址获取的内容。
@@ -82,12 +78,12 @@ def get_history_data_D_S15(url):
 
         # 终端打印
         # print(list1)
-        print("总行数：" + str(len(list1)))
-
-        # 遍历打印每一行
-        for list_ in list1:
-            print(list_)
-
+        # print("总行数：" + str(len(list1)))
+        #
+        # # 遍历打印每一行
+        # for list_ in list1:
+        #     print(list_)
+        print("文件已保存成功："+file_name+".xlsx")
 
 """定义获取双色球历史数据的函数（特殊情况：快乐星期八）"""
 
@@ -147,11 +143,12 @@ def get_history_data_D_S16(url, file_name_):
 
         # 终端打印
         # print(list1)
-        print("总行数：" + str(len(list1)))
-
-        # 遍历打印每一行
-        for list_ in list1:
-            print(list_)
+        # print("总行数：" + str(len(list1)))
+        #
+        # # 遍历打印每一行
+        # for list_ in list1:
+        #     print(list_)
+        print("文件已保存成功：" + file_name_ + ".xlsx")
 
 
 """ 定义获取七星彩\排列5历史数据的函数"""
@@ -176,7 +173,7 @@ def get_history_data_57(url):
 
         # 将数据转化为list,每15个空格为一行
         str_list = text_content.split()[5:]  # 将字符串按空格分割成列表
-        print(str_list)
+        # print(str_list)
         list1 = []  # 创建一个空列表，用于存放子列表
         sub_list = []  # 创建一个空列表，用于临时存放子列表的元素
 
@@ -230,11 +227,11 @@ def get_history_data_57(url):
 
         # 终端打印
         # print(list1)
-        print("总行数：" + str(len(list1)))
-        # 遍历打印每一行
-        for list_ in list1:
-            print(list_)
-
+        # print("总行数：" + str(len(list1)))
+        # # 遍历打印每一行
+        # for list_ in list1:
+        #     print(list_)
+        print("文件已保存成功：" + file_name + ".xlsx")
 
 
 
@@ -258,7 +255,7 @@ def get_history_data_3(url):
 
         # 将数据转化为list,每15个空格为一行
         str_list = text_content.split()[14:]  # 将字符串按空格分割成列表
-        print(str_list)
+        # print(str_list)
         list1 = []  # 创建一个空列表，用于存放子列表
         sub_list = []  # 创建一个空列表，用于临时存放子列表的元素
 
@@ -295,71 +292,72 @@ def get_history_data_3(url):
 
         # 终端打印
         # print(list1)
-        print("总行数：" + str(len(list1)))
-        # 遍历打印每一行
-        for list_ in list1:
-            print(list_)
+        # print("总行数：" + str(len(list1)))
+        # # 遍历打印每一行
+        # for list_ in list1:
+        #     print(list_)
+        print("文件已保存成功：" + file_name + ".xlsx")
 
 
 
 if __name__ == '__main__':
-    while (1):
-        print("请选择需要查询的彩票类型：1-大乐透；2-双色球；3-排列3;5-排列5;7-七星彩")
-        type_chioce = input("请输入选项（1或2或3或5或7）：")
-        print(
-            "期数格式为5位数字，其中前两位为年份的后两位，后三位为当年的期数，比如24010表示2024年第10期")
-        start_date = input("请输入历史数据开始期数：")
-        end_date = input("请输入历史数据结束期数：")
-        if (int(type_chioce) == 1):
-            type_name = "dlt"
-        elif (int(type_chioce) == 2):
-            type_name = "ssq"
-        elif (int(type_chioce) == 3):
-            type_name = "pls"
-        elif (int(type_chioce) == 5):
-            type_name = "plw"
-        elif (int(type_chioce) == 7):
-            type_name = "qxc"
-        else:
-            print("请重新输入选项")
 
-        # 结合每种彩票的特点，分支讨论，每种彩票使用一个函数去执行，双色球和大乐透因为数量大致相同，可以使用同一个函数。  """双色球考虑11070期之前含快乐星期八，需要分情况考虑"""
+    print("请选择需要查询的彩票类型：1-大乐透；2-双色球；3-排列3;5-排列5;7-七星彩")
+    type_chioce = input("请输入选项（1或2或3或5或7）：")
+    print(
+        "期数格式为5位数字，其中前两位为年份的后两位，后三位为当年的期数，比如24010表示2024年第10期")
+    start_date = input("请输入历史数据开始期数：")
+    end_date = input("请输入历史数据结束期数：")
+    if (int(type_chioce) == 1):
+        type_name = "dlt"
+    elif (int(type_chioce) == 2):
+        type_name = "ssq"
+    elif (int(type_chioce) == 3):
+        type_name = "pls"
+    elif (int(type_chioce) == 5):
+        type_name = "plw"
+    elif (int(type_chioce) == 7):
+        type_name = "qxc"
+    else:
+        print("请重新输入选项")
 
-        if int(type_chioce) == 2:
-            if int(start_date) <= 11070 and int(end_date) > 11070:
-                base_url1 = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
-                    start_date) + "&end=11070"
-                file_name_1 = "【双色球】" + str(start_date) + "期到11070期的历史开奖数据"
-                get_history_data_D_S16(base_url1, file_name_1)
-                file_name_2 = "11071期到" + str(end_date) + "期的历史开奖数据"
-                base_url2 = "https://datachart.500.com/" + str(
-                    type_name) + "/history/newinc/history.php?start=11071&end=" + str(end_date)
-                get_history_data_D_S15(base_url2)
-            elif int(start_date) > 11070:
-                base_url = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
-                    start_date) + "&end=" + str(end_date)
-                file_name = str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"
-                get_history_data_D_S15(base_url)
-            elif int(end_date) <= 11070:
-                base_url = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
-                    start_date) + "&end=" + str(end_date)
-                file_name = "【双色球】" + str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"
-                get_history_data_D_S16(base_url, file_name)
+    # 结合每种彩票的特点，分支讨论，每种彩票使用一个函数去执行，双色球和大乐透因为数量大致相同，可以使用同一个函数。  """双色球考虑11070期之前含快乐星期八，需要分情况考虑"""
 
-        # 七星彩\排列5历史数据
-        elif int(type_chioce) == 7  or int(type_chioce) == 5:
-            base_url = "https://datachart.500.com/" + str(type_name) + "/history/inc/history.php?limit="+str(int(int(end_date)-int(start_date)))+"&start=" + str(
-                start_date) + "&end=" + str(end_date)
-            get_history_data_57(base_url)
-
-        elif int(type_chioce) ==3:
-            base_url = "https://datachart.500.com/" + str(type_name) + "/history/inc/history.php?limit="+str(int(int(end_date)-int(start_date)))+"&start=" + str(
-                start_date) + "&end=" + str(end_date)
-            get_history_data_3(base_url)
-
-
-        # 大乐透和双色球正常使用函数
-        else:
+    if int(type_chioce) == 2:
+        if int(start_date) <= 11070 and int(end_date) > 11070:
+            base_url1 = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
+                start_date) + "&end=11070"
+            file_name_1 = "【双色球】" + str(start_date) + "期到11070期的历史开奖数据"
+            get_history_data_D_S16(base_url1, file_name_1)
+            file_name_2 = "11071期到" + str(end_date) + "期的历史开奖数据"
+            base_url2 = "https://datachart.500.com/" + str(
+                type_name) + "/history/newinc/history.php?start=11071&end=" + str(end_date)
+            get_history_data_D_S15(base_url2)
+        elif int(start_date) > 11070:
             base_url = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
                 start_date) + "&end=" + str(end_date)
+            file_name = str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"
             get_history_data_D_S15(base_url)
+        elif int(end_date) <= 11070:
+            base_url = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
+                start_date) + "&end=" + str(end_date)
+            file_name = "【双色球】" + str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"
+            get_history_data_D_S16(base_url, file_name)
+
+    # 七星彩\排列5历史数据
+    elif int(type_chioce) == 7  or int(type_chioce) == 5:
+        base_url = "https://datachart.500.com/" + str(type_name) + "/history/inc/history.php?limit="+str(int(int(end_date)-int(start_date)))+"&start=" + str(
+            start_date) + "&end=" + str(end_date)
+        get_history_data_57(base_url)
+
+    elif int(type_chioce) ==3:
+        base_url = "https://datachart.500.com/" + str(type_name) + "/history/inc/history.php?limit="+str(int(int(end_date)-int(start_date)))+"&start=" + str(
+            start_date) + "&end=" + str(end_date)
+        get_history_data_3(base_url)
+
+
+    # 大乐透和双色球正常使用函数
+    else:
+        base_url = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
+            start_date) + "&end=" + str(end_date)
+        get_history_data_D_S15(base_url)
