@@ -1,17 +1,17 @@
 """
-功能说明：通过python获取彩票（大乐透）的历史开奖数据
+功能说明：通过python获取彩票（大乐透、双色球、排列3、排列5、七星彩）的历史开奖数据
 数据源：https://datachart.500.com/dlt/history/history.shtml
 
 注意：需要历史数据的时间区间确定最终的url,F12分析网页请求即可得出真实请求地址
-# Pdata_url = "https://datachart.500.com/dlt/history/history.shtml"
-# Pdata_url ="https://datachart.500.com/dlt/history/newinc/history.php?start=10000&end=24024"
 
-# 七星彩  https://datachart.500.com/qxc/history/inc/history.php?limit=24025&start=00001&end=24026
+# 大乐透、双色球 请求地址：Pdata_url ="https://datachart.500.com/dlt/history/newinc/history.php?start=10000&end=24024"
+
+# 七星彩、排列3、排列5 请求地址：  https://datachart.500.com/qxc/history/inc/history.php?limit=24025&start=00001&end=24026
 """
 
 import requests,sys,io
 from lxml import etree
-import pandas as pd
+# import pandas as pd
 from openpyxl import Workbook
 
 
@@ -305,7 +305,7 @@ def get_history_data_3(url):
 if __name__ == '__main__':
     while (1):
         print("请选择需要查询的彩票类型：1-大乐透；2-双色球；3-排列3;5-排列5;7-七星彩")
-        type_chioce = input("请输入选项（1或2或7）：")
+        type_chioce = input("请输入选项（1或2或3或5或7）：")
         print(
             "期数格式为5位数字，其中前两位为年份的后两位，后三位为当年的期数，比如24010表示2024年第10期")
         start_date = input("请输入历史数据开始期数：")
