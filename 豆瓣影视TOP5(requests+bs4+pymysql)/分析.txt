@@ -1,0 +1,13 @@
+1.豆瓣网站
+https://movie.douban.com/chart
+https://movie.douban.com/review/best/
+
+soup1 = soup.find_all(width="75")  # 解析出电影名称
+# print(soup1[0]['alt'])
+soup2 = soup.find_all('span', class_="rating_nums")  # 解析出评分
+
+list_name = []  列表
+list_value = []  列表
+dict_name_value = dict(zip(list_name, list_value))组合成字典
+mv_top[i][0]#电影名
+mv_top[i][1]#评分
