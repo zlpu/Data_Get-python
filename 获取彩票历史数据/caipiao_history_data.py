@@ -16,7 +16,7 @@ from openpyxl import Workbook
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 """定义获取大乐透/双色球历史数据的函数（正常情况）"""
-def get_history_data_D_S15(url):
+def get_history_data_D_S15(url,file_name_):
     # 获取网页
     rs_1 = requests.get(url)  # 这一行使用了requests库中的get方法来向指定的url发送一个HTTP GET请求，然后将响应保存在rs_1变量中。这个响应对象包含了从指定网址获取的内容。
     html_1 = rs_1.text  # 这一行将响应对象rs_1的文本内容保存在html_1变量中。这个文本内容通常就是网页的HTML代码。
@@ -63,13 +63,13 @@ def get_history_data_D_S15(url):
             ws.append(["【大乐透】" + str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"])
             ws.append(["期号", "前区-1", "前区-2", "前区-3", "前区-4", "前区-5", "后区-1", "后区-2", "奖池奖金（元）",
                        "一等奖-注数", "一等奖-奖金", "二等奖-注数", "二等奖-奖金", "总投注金额", "开奖日期"])
-            file_name = "【大乐透】"+str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"
+            file_name = "【大乐透】"+ file_name_
         elif int(type_chioce) == 2:
             ws.append(["【双色球】" + str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"])
             ws.append(["期号", "红球-1", "红球-2", "红球-3", "红球-4", "红球-5", "红球-6", "篮球-1",
                        "奖池奖金（元）",
                        "一等奖-注数", "一等奖-奖金", "二等奖-注数", "二等奖-奖金", "总投注金额", "开奖日期"])
-            file_name = "【双色球】" + str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"
+            file_name = "【双色球】" + file_name_
 
         # 将数据写入工作表
         for row in list1:
@@ -329,15 +329,17 @@ if __name__ == '__main__':
                 start_date) + "&end=11070"
             file_name_1 = "【双色球】" + str(start_date) + "期到11070期的历史开奖数据"
             get_history_data_D_S16(base_url1, file_name_1)
+
             file_name_2 = "11071期到" + str(end_date) + "期的历史开奖数据"
             base_url2 = "https://datachart.500.com/" + str(
                 type_name) + "/history/newinc/history.php?start=11071&end=" + str(end_date)
-            get_history_data_D_S15(base_url2)
+            get_history_data_D_S15(base_url2,file_name_2)
+
         elif int(start_date) > 11070:
             base_url = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
                 start_date) + "&end=" + str(end_date)
-            file_name = str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"
-            get_history_data_D_S15(base_url)
+            file_name = "【双色球】"+str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"
+            get_history_data_D_S15(base_url,file_name)
         elif int(end_date) <= 11070:
             base_url = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
                 start_date) + "&end=" + str(end_date)
@@ -360,4 +362,5 @@ if __name__ == '__main__':
     else:
         base_url = "https://datachart.500.com/" + str(type_name) + "/history/newinc/history.php?start=" + str(
             start_date) + "&end=" + str(end_date)
-        get_history_data_D_S15(base_url)
+        file_name = str(start_date) + "期到" + str(end_date) + "期的历史开奖数据"
+        get_history_data_D_S15(base_url,file_name)
